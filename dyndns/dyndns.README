@@ -1,0 +1,50 @@
+# vi: set ft=markdown :
+
+## Configuration
+
+- `FQDN`: Full qualified domain name to update
+- `DYNDNS_URL`: DynDNS service provider (OVH by default)
+- `DYNDNS_USER`: User name
+- `DYNDNS_PASSWORD`: Password
+- `MACHINE_NAME`: Docker machine name used to retrieve the IP
+
+## Usage
+
+Create a `.env` file:
+
+```env
+# General configuration
+MACHINE_NAME=<Your machine name>
+
+# FQDN
+FQDN=<Your domain name>
+
+# DynDNS configuration
+DYNDNS_USER=<Your DynDNS user>
+DYNDNS_PASSWORD=<Your DyDNS password>
+```
+
+Create a `Makefile`:
+
+```makefile
+# Import custom configuration
+include .env
+
+# Include common Make tasks
+root_dir:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+makefiles:=$(root_dir)/makefiles
+include $(makefiles)/help.Makefile
+include $(makefiles)/dyndns/dyndns.Makefile
+
+## Apply configuration
+apply: dyndns
+.PHONY : apply
+```
+
+Play:
+
+```bash
+$ make apply
+```
+
+---

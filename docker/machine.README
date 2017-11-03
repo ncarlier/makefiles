@@ -1,0 +1,68 @@
+# vi: set ft=markdown :
+
+## Configuration
+
+- `MACHINE_NAME`: Docker machine name
+- `MACHINE_DRIVER`: Docker machine driver (generic or Scaleway)
+
+### Generic configuration
+
+- `GENERIC_ENGINE_PORT`: Port to use for Docker Daemon (2376)
+- `GENERIC_IP_ADDRESS`: IP Address of host (127.0.0.1)
+- `GENERIC_SSH_USER`: SSH username used to connect (root)
+- `GENERIC_SSH_PORT`: Port to use for SSH (22)
+
+### Scaleway configuration
+
+- `SCALEWAY_COMMERCIAL_TYPE`: Scaleway commercial host type (VC1S)
+- `SCALEWAY_ORGANIZATION`: Scaleway organization
+- `SCALEWAY_TOKEN`: Scaleway token
+
+## Usage
+
+Create a `.env` file:
+
+```env
+# General configuration
+MACHINE_NAME=<Your machine name>
+
+# Scaleway configuration
+SCALEWAY_ORGANIZATION=<Your Scaleway organisation UUID>
+SCALEWAY_TOKEN=<Your Scaleway token>
+```
+
+Create a `Makefile`:
+
+```makefile
+# Import custom configuration
+include .env
+
+# Include common Make tasks
+root_dir:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+makefiles:=$(root_dir)/makefiles
+include $(makefiles)/help.Makefile
+include $(makefiles)/docker/machine.Makefile
+
+## Apply configuration
+apply: machine-create machine-env
+.PHONY : apply
+
+## Un-apply configuration
+unapply: machine-rm
+.PHONY : unapply
+
+## Login with SSH
+ssh: machine-ssh
+.PHONY : ssh
+
+```
+
+Play:
+
+```bash
+$ make apply
+$ make ssh
+$ make unapply
+```
+
+---
