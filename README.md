@@ -60,6 +60,8 @@ ssh: machine-ssh
 Play:
 
 ```bash
+$ # Get contextual help
+$ make help
 $ # Create the Docker machine
 $ make setup
 $ # Switch Docker host
