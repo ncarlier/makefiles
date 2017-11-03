@@ -27,7 +27,7 @@ define machine_options_for_generic
 --generic-engine-port=$(GENERIC_ENGINE_PORT) \
 --generic-ip-address=$(GENERIC_IP_ADDRESS) \
 --generic-ssh-user=$(GENERIC_SSH_USER) \
---generic-ssh-port=$(GENERIC_SSH_PORT) \
+--generic-ssh-port=$(GENERIC_SSH_PORT)
 endef
 
 # ########################################
@@ -42,7 +42,7 @@ define machine_options_for_scaleway
 --scaleway-commercial-type="$(SCALEWAY_COMMERCIAL_TYPE)" \
 --scaleway-organization="$(SCALEWAY_ORGANIZATION)" \
 --scaleway-token="$(SCALEWAY_TOKEN)" \
---scaleway-name="$(MACHINE_NAME)" \
+--scaleway-name="$(MACHINE_NAME)"
 endef
 
 # Create docker machine
