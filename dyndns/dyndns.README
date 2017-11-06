@@ -1,12 +1,18 @@
-# vi: set ft=markdown :
+<!-- vi: set ft=markdown : -->
+
+# DynDNS
+
+## Tasks
+
+- `dyndns`: Register Docker machine IP with FQDN
 
 ## Configuration
 
 - `FQDN`: Full qualified domain name to update
+- `MACHINE_NAME`: Docker machine name used to retrieve the IP
 - `DYNDNS_URL`: DynDNS service provider (OVH by default)
 - `DYNDNS_USER`: User name
 - `DYNDNS_PASSWORD`: Password
-- `MACHINE_NAME`: Docker machine name used to retrieve the IP
 
 ## Usage
 
