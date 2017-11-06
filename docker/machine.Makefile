@@ -14,7 +14,7 @@ MACHINE_DRIVER?=generic
 GENERIC_ENGINE_PORT?=2376
 
 # IP Address of host
-GENERIC_IP_ADDRESS?=127.0.0.1
+GENERIC_IP_ADDRESS?=$(TF_IP)
 
 # SSH username used to connect
 GENERIC_SSH_USER?=root
@@ -50,6 +50,7 @@ machine-create:
 	echo "Building Docker machine $(MACHINE_NAME) with $(MACHINE_DRIVER) driver..."
 	docker-machine create -d $(MACHINE_DRIVER) \
 		$(machine_options_for_$(MACHINE_DRIVER)) \
+		$(machine_extra_options_for_$(MACHINE_DRIVER)) \
 		$(MACHINE_NAME)
 .PHONY : machine-create
 
@@ -61,7 +62,7 @@ machine-rm:
 
 # Show Docker machine configuration
 machine-env:
-	docker-machine env $(MACHINE_NAME)
+	docker-machine env --no-proxy $(MACHINE_NAME)
 .PHONY : machine-env
 
 # Log into the Docker machine
