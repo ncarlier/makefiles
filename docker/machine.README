@@ -1,9 +1,18 @@
-# vi: set ft=markdown :
+<!-- vi: set ft=markdown : -->
+
+# Docker Machine
+
+## Tasks
+
+- `machine-create`: Create Docker Machine instance
+- `machine-rm`: Remove Docker Machine instance
+- `machine-env`: Get Docker Machine configuration
+- `machine-ssh`: Log into the Docker Machine
 
 ## Configuration
 
 - `MACHINE_NAME`: Docker machine name
-- `MACHINE_DRIVER`: Docker machine driver (generic or Scaleway)
+- `MACHINE_DRIVER`: Docker machine driver (`generic` or `scaleway`)
 
 ### Generic configuration
 

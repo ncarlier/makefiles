@@ -1,8 +1,23 @@
-# vi: set ft=markdown :
+<!-- vi: set ft=markdown :-->
+
+# Docker Compose
+
+## Tasks
+
+- `compose-build`: Build Docker images
+- `compose-up`: Deploy Docker stack
+- `compose-down`: Un-deploy Docker stack
+- `compose-wait`: Wait for the health check of the `${service}`
+- `compose-config`: Run the `config-${service}` task
+- `compose-stop`: Stop the `${service}`
+- `compose-start`: Start the `${service}`
+- `compose-restart`: Restart the `${service}`
+- `compose-logs`: Get service(s) logs
+- `compose-ps`: Get services status
 
 ## Configuration
 
-- `COMPOSE_FILES`: Docker conpose configuration files (-f a.yml -f b.yml ...)
+- `COMPOSE_FILES`: Docker compose configuration files (-f a.yml -f b.yml ...)
 
 ## Usage
 

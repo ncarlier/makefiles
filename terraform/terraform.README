@@ -1,0 +1,67 @@
+<!-- vi: set ft=markdown : -->
+
+# Terraform
+
+## Tasks
+
+- `tf-plan`: Build the plan
+- `tf-apply`: Apply the plan
+- `tf-show`: Show the plan
+- `tf-destroy`: Destroy the plan
+- `tf-get-ip`: Get machine IP
+- `tf-ssh`: Get SSH session
+
+## Usage
+
+Retrieve your API and secret keys from CloudStack and put them into the
+ `terraform.tfvars` file:
+
+```
+api_key="YOUR API KEY"
+secret_key="YOUR SECRET KEY"
+```
+
+
+Create a `users.txt` file with Gitlab usernames:
+
+```
+ncarlier
+foo
+...
+```
+
+Create a `Makefile`:
+
+```makefile
+
+# Proxy used to access Terraform API
+PROXY_GATEWAY?=http://gateway.fqdn:3128
+
+# Include common Make tasks
+root_dir:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+makefiles:=$(root_dir)/makefiles
+include $(makefiles)/help.Makefile
+include $(makefiles)/dyndns/dyndns.Makefile
+
+## Apply configuration
+apply: tf-plan tf-apply tg-get-ip
+.PHONY : apply
+
+## Un-apply configuration
+unapply: tf-destroy
+.PHONY : unapply
+
+## Get SSH session
+ssh: tf-ssh
+.PHONY: ssh
+```
+
+Play:
+
+```bash
+$ make apply
+$ make ssh
+$ make unapply
+```
+
+---
