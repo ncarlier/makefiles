@@ -36,16 +36,25 @@ compose-up:
 	-cat .env
 	docker-compose $(COMPOSE_FILES) up -d
 	echo "Congrats! Compose stack deployed."
+.PHONY: compose-up
 
 # Un-deploy compose stack
 compose-down:
-	@echo "Un-deploying compose stack..."
+	echo "Un-deploying compose stack..."
 	@while [ -z "$$CONTINUE" ]; do \
 		read -r -p "Are you sure? [y/N]: " CONTINUE; \
 	done ; \
 	[ $$CONTINUE = "y" ] || [ $$CONTINUE = "Y" ] || (echo "Exiting."; exit 1;)
 	docker-compose $(COMPOSE_FILES) down
-	@echo "Compose stack un-deployed."
+	echo "Compose stack un-deployed."
+.PHONY: compose-down
+
+# Un-deploy compose stack (without user confirmation)
+compose-down-force:
+	echo "Un-deploying compose stack..."
+	docker-compose $(COMPOSE_FILES) down
+	echo "Compose stack un-deployed."
+.PHONY: compose-down-force
 
 # Stop a service ($$service)
 compose-stop:
