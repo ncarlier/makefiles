@@ -57,7 +57,7 @@ machine-create:
 # Remove docker machine
 machine-rm:
 	echo "Removing Docker machine $(MACHINE_NAME)..."
-	docker-machine rm $(MACHINE_NAME)
+	docker-machine rm -f $(MACHINE_NAME)
 .PHONY : machine-rm
 
 # Show Docker machine configuration
