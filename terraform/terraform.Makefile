@@ -22,7 +22,7 @@ user_data.yml:
 
 tf-plan: user_data.yml
 	echo "Building execution plan..."
-	terraform plan
+	${tfcmd} plan
 .PHONY: tf-plan
 
 tf-apply:
