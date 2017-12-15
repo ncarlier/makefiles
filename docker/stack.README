@@ -1,0 +1,54 @@
+<!-- vi: set ft=markdown :-->
+
+# Docker stack
+
+## Tasks
+
+- `stack-deploy`: Deploy Docker stack
+- `stack-rm`: Un-deploy Docker stack
+- `stack-rm-force`: Un-deploy Docker stack (without asking for confirmation)
+- `stack-logs`: Get stack logs
+- `stack-ps`: Get stack status
+- `stack-services`: Get stack services
+- `stack-service-wait`: Wait for the health check of the `${service}`
+
+## Configuration
+
+- `COMPOSE_FILES`: Docker compose configuration files (-f a.yml -f b.yml ...)
+
+## Usage
+
+Create a `Makefile`:
+
+```makefile
+# Docker compose configuration files
+COMPOSE_FILES?=-f docker-compose.yml
+
+# Include common Make tasks
+root_dir:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+makefiles:=$(root_dir)/makefiles
+include $(makefiles)/help.Makefile
+include $(makefiles)/docker/stack.Makefile
+
+## Apply configuration
+apply: stack-deploy stack-logs
+.PHONY : apply
+
+## Un-apply configuration
+unapply: stack-rm
+.PHONY : unapply
+
+## Get stack status
+status: stack-ps
+.PHONY : status
+
+```
+
+Play:
+
+```bash
+$ make apply
+$ make status
+$ make unapply
+```
+---
