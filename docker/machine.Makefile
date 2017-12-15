@@ -45,6 +45,13 @@ define machine_options_for_scaleway
 --scaleway-name="$(MACHINE_NAME)"
 endef
 
+# Ensure that the current Docker machine is the targeted one
+ensure-machine:
+	CURRENT_HOSTNAME=`docker-machine active`; \
+	[[ $$CURRENT_HOSTNAME != "$(MACHINE_NAME)" ]] && echo "Not on good Docker host!" && exit 1 ; \
+	echo "Using $$CURRENT_HOSTNAME Docker host..."
+.PHONY: ensure-machine
+
 # Create docker machine
 machine-create:
 	echo "Building Docker machine $(MACHINE_NAME) with $(MACHINE_DRIVER) driver..."
